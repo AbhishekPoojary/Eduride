@@ -177,6 +177,128 @@ eduride/
 - `GET /api/notifications` - Get all notifications for the logged-in user
 - `POST /api/notifications/send` - Send a new notification (admin only)
 
+## 🌟 Screenshots
+
+<div align="center">
+  <h3>📱 Application Screenshots</h3>
+  
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin: 20px 0;">
+    <figure style="text-align: center;">
+      <img src="screenshots/Login_Page.png" alt="Login Page" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px;">
+      <figcaption>Login Page</figcaption>
+    </figure>
+    
+    <figure style="text-align: center;">
+      <img src="screenshots/Student_Dashboard.png" alt="Student Dashboard" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px;">
+      <figcaption>Student Dashboard</figcaption>
+    </figure>
+    
+    <figure style="text-align: center;">
+      <img src="screenshots/Admin_Dashboard.png" alt="Admin Dashboard" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px;">
+      <figcaption>Admin Dashboard</figcaption>
+    </figure>
+    
+    <figure style="text-align: center;">
+      <img src="screenshots/Bus_Tracking.png" alt="Bus Tracking" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px;">
+      <figcaption>Bus Tracking</figcaption>
+    </figure>
+    
+    <figure style="text-align: center;">
+      <img src="screenshots/Notifications.png" alt="Notifications" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px;">
+      <figcaption>Notifications</figcaption>
+    </figure>
+  </div>
+</div>
+
+> ℹ️ *Screenshots show the current state of the application. Click on any image to view it in full size.*
+
+## 🛠️ Environment Variables
+
+Create a `.env` file in the backend directory with the following variables:
+
+```
+# Server Configuration
+PORT=5000
+NODE_ENV=development
+
+# MongoDB
+MONGO_URI=your_mongodb_connection_string
+
+# JWT
+JWT_SECRET=your_jwt_secret
+JWT_EXPIRE=30d
+
+# Twilio (for SMS notifications)
+TWILIO_ACCOUNT_SID=your_twilio_sid
+TWILIO_AUTH_TOKEN=your_twilio_token
+TWILIO_PHONE_NUMBER=your_twilio_phone
+```
+
+## 🧪 Testing
+
+To run tests for the backend:
+
+```bash
+cd backend
+npm test
+```
+
+For frontend testing:
+
+```bash
+cd frontend
+npm test
+```
+
+## 🚀 Deployment
+
+### Backend Deployment
+1. Set `NODE_ENV=production` in your environment variables
+2. Install production dependencies:
+   ```bash
+   npm install --production
+   ```
+3. Start the server using a process manager like PM2:
+   ```bash
+   pm2 start server.js --name eduride-backend
+   ```
+
+### Frontend Deployment
+1. Build the production version:
+   ```bash
+   cd frontend
+   npm run build
+   ```
+2. Deploy the `build` folder to your preferred static hosting service (Netlify, Vercel, etc.)
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+1. **RFID Module Not Detected**
+   - Check wiring connections
+   - Verify the correct SPI pins are used
+   - Ensure proper power supply (3.3V)
+
+2. **GPS Not Getting Fix**
+   - Ensure clear view of the sky
+   - Check antenna connection
+   - Verify baud rate settings
+
+3. **API Connection Issues**
+   - Check if the backend server is running
+   - Verify CORS settings in the backend
+   - Check network connectivity
+
+
 ## 📝 License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [React](https://reactjs.org/)
+- [Node.js](https://nodejs.org/)
+- [MongoDB](https://www.mongodb.com/)
+- [Arduino](https://www.arduino.cc/)
+- All the amazing open-source libraries used in this project
