@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EduRide GPS Tracker</title>
+  <meta charset="UTF-8" />
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.6.7/firebase-database.js"></script>
+
+  <style>
+    body { margin:0; padding:0; overflow:hidden; }
+    #map { height: 100vh; width: 100vw; }
+
+    .map-btn {
+      position:absolute;
+      top:15px; right:15px;
+      z-index:9999;
+      background:white;
+      padding:8px 12px;
+      border-radius:6px;
+      border:1px solid #ccc;
+      cursor:pointer;
+      font-family:sans-serif;
+      font-size:14px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+  <button id="locateBtn" class="map-btn">📍 Locate Bus</button>
+  <button id="toggleBtn" class="map-btn" style="top:60px;">🛰 Toggle Satellite</button>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
+import { getDatabase, ref, onChildAdded } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-database.js";
+
+// 🔹 Parse deviceId from URL
+const params = new URLSearchParams(window.location.search);
+const deviceId = params.get("deviceId") || "ESP_TEST";
+
+// 🔹 Firebase config
+const firebaseConfig = {
+  apiKey: "AIzaSyDsRvHkE1reVjxDqS2w-tnboWnzilfSjqw",
+  authDomain: "eduride-22bd0.firebaseapp.com",
+  databaseURL: "https://eduride-22bd0-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "eduride-22bd0",
+  storageBucket: "eduride-22bd0.appspot.com",
+  messagingSenderId: "864101888177",
+  appId: "1:864101888177:web:8c32c61be8996d47e2b290"
+};
+
+initializeApp(firebaseConfig);
+const db = getDatabase();
+
+// ---------- MAP ----------
+const map = L.map('map').setView([12.97, 77.59], 13);
+
+// Normal & Satellite
+const normalLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png");
+const satelliteLayer = L.tileLayer(
+  "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+);
+
+normalLayer.addTo(map);
+
+let satellite = false;
+
+// Toggle Satellite
+document.getElementById("toggleBtn").onclick = () => {
+  if (satellite) {
+    map.removeLayer(satelliteLayer);
+    normalLayer.addTo(map);
+  } else {
+    map.removeLayer(normalLayer);
+    satelliteLayer.addTo(map);
+  }
+  satellite = !satellite;
+};
+
+// Custom bus icon
+const busIcon = L.icon({
+  iconUrl: "/bus.png",
+  iconSize: [40, 40],
+  iconAnchor: [20, 40]
+});
+
+let marker = null;
+let trail = L.polyline([], { color: "yellow" }).addTo(map);
+let lastLatLng = null;
+
+// Locate Bus button
+document.getElementById("locateBtn").onclick = () => {
+  if (lastLatLng) map.setView(lastLatLng, 17);
+};
+
+// 🔹 Listen to Firebase live updates
+const histRef = ref(db, "/devices/" + deviceId + "/history");
+
+onChildAdded(histRef, snap => {
+  const d = snap.val();
+  if (!d || !d.lat || !d.lon) return;
+
+  const latLng = [d.lat, d.lon];
+  lastLatLng = latLng;
+
+  // Marker
+  if (!marker) {
+    marker = L.marker(latLng, { icon: busIcon }).addTo(map);
+  } else {
+    marker.setLatLng(latLng);
+  }
+
+  // Trail
+  trail.addLatLng(latLng);
+});
+
+</script>
+</body>
+</html>
