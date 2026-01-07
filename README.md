@@ -179,38 +179,23 @@ eduride/
 
 ## 🌟 Screenshots
 
-<div align="center">
-  <h3>📱 Application Screenshots</h3>
-  
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin: 20px 0;">
-    <figure style="text-align: center;">
-      <img src="screenshots/Login_Page.png" alt="Login Page" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px;">
-      <figcaption>Login Page</figcaption>
-    </figure>
-    
-    <figure style="text-align: center;">
-      <img src="screenshots/Student_Dashboard.png" alt="Student Dashboard" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px;">
-      <figcaption>Student Dashboard</figcaption>
-    </figure>
-    
-    <figure style="text-align: center;">
-      <img src="screenshots/Admin_Dashboard.png" alt="Admin Dashboard" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px;">
-      <figcaption>Admin Dashboard</figcaption>
-    </figure>
-    
-    <figure style="text-align: center;">
-      <img src="screenshots/Bus_Tracking.png" alt="Bus Tracking" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px;">
-      <figcaption>Bus Tracking</figcaption>
-    </figure>
-    
-    <figure style="text-align: center;">
-      <img src="screenshots/Notifications.png" alt="Notifications" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px;">
-      <figcaption>Notifications</figcaption>
-    </figure>
-  </div>
-</div>
+### 📱 Application Screenshots
 
-> ℹ️ *Screenshots show the current state of the application. Click on any image to view it in full size.*
+#### Login Page
+![Login Page](screenshots/Login_Page.png)
+
+#### Student Dashboard
+![Student Dashboard](screenshots/Student_Dashboard.png)
+
+#### Admin Dashboard
+![Admin Dashboard](screenshots/Admin_Dashboard.png)
+
+#### Bus Tracking
+![Bus Tracking](screenshots/Bus_Tracking.png)
+
+#### Notifications
+![Notifications](screenshots/Notifications.png)
+
 
 ## 🛠️ Environment Variables
 
